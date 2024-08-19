@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { IMethod } from "../interfaces/IMethod";
+import { mockServer } from "../utils/mockServer";
 
 const BASE_URL = "https://www.japhetism.com/api/v1";
 
@@ -18,7 +19,8 @@ export const api = async <T> (
     };
 
     try {
-        const response = await axios(config);
+        //const response = await axios(config);
+        const response = mockServer(endpoint);
         return response;
     } catch (error) {
         console.log("API ERROR ", error);
