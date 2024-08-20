@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/store";
 import { fetchGroups } from "../../redux/group";
 import Button from "../button";
+import Error from "../error";
 import { IGroup } from "../../interfaces/IGroup";
 import { formatGroupUserLabel } from "../../utils/formatter";
 
@@ -18,6 +19,7 @@ const GroupList = () => {
     }, [status, dispatch]);
     
     return <>
+        <Error show={status === "error"} message={error} />
         <div className="flex flex-row mt-4 mb-3 space-x-2 overflow-x-auto scrollbar-hidden">
             {groups.map((group: IGroup, index: number) => (
                 <div key={`${index}-${group.id}`}>

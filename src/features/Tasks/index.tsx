@@ -6,6 +6,7 @@ import { fetchTasks } from "../../redux/task";
 import { getFormattedTodayDate } from "../../utils/formatter";
 import { getGreetingBasedOnTime } from "../../utils/helper";
 import { ITask } from "../../interfaces/ITask";
+import Error from "../../components/error";
 
 const Tasks = () => {
 
@@ -25,6 +26,7 @@ const Tasks = () => {
                 <p className="text-gray-500 text-lg mt-1">{getFormattedTodayDate()}</p>
             </div>
             <div className="mt-5">
+                <Error show={status === "error"} message={error} />
                 {tasks.map((task: ITask, index: number) => (
                     <div className="relative flex items-center justify-between w-full bg-white p-4 rounded-xl mb-2" key={index}>
                         <div className="flex items-center space-x-2">

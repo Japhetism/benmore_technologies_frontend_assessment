@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
+import Button from "../button";
+import Error from "../error";
 import { fetchLists } from "../../redux/list";
 import { IList } from "../../interfaces/IList"
-import Button from "../button";
 import { listIconsFixtures } from "../../fixtures/icons";
 
 const ListList = () => {
@@ -25,6 +26,7 @@ const ListList = () => {
     }
 
     return <>
+        <Error show={status === "error"} message={error} />
         <ul className="space-y-2 text-md text-black">
             {(status !== "loading" && status !== "error") && (
                 <li className="relative mt-2 mb-2 flex items-center block py-2 px-2 rounded hover:bg-slate-300">
