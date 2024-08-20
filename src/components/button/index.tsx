@@ -12,7 +12,7 @@ const Button = ({
     return <>
         <button onClick={() => onClick()} className="relative flex items-center block py-2 px-1 pl-2 rounded-full text-md text-left text-black w-full bg-slate-300 hover:bg-slate-300 font-bold border-0 m-0">
             {showPlusIcon && (
-                <span className="flex items-center text-xl"><AiOutlinePlus /></span>
+                <span className="mr-1 flex items-center text-md"><AiOutlinePlus /></span>
             )}
             {name}
             <div className="absolute bottom-0 right-0 flex space-x-1 p-1">
