@@ -23,8 +23,9 @@ const ListList = () => {
                 <Link to="" className="block py-2 px-2 rounded hover:bg-slate-300">Home</Link>
             </li>
             {lists.map((list: IList, index: number) => (
-                <li className="mt-4 mb-4" key={`${index}-${list.id}`}>
-                    <Link to="" className="block py-2 px-2 rounded hover:bg-slate-300">{list.name}</Link>
+                <li className="relative mt-4 mb-4 flex items-center block py-2 px-2 rounded hover:bg-slate-300" key={`${index}-${list.id}`}>
+                    <Link to="" className="">{list.name}</Link>
+                    <span className="absolute right-2 w-8 h-8 bg-gray-200 text-gray-500 flex items-center justify-center rounded-full text-sm">{index}</span>
                 </li>
             ))}
         </ul>
