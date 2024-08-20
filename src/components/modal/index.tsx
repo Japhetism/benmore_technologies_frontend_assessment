@@ -1,8 +1,10 @@
-import { IModal } from "../../interfaces/IModal";
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineMacCommand, AiOutlinePlus } from "react-icons/ai";
+import { RootState, AppDispatch } from "../../redux/store";
+import { hideModal } from "../../redux/modal";
 import SelectDropdown from "../dropdown";
 
-const Modal = ({ isOpen = false, children, onClose }: IModal) => {
+const Modal = ({ isOpen = false, children, onClose }: any) => {
   
   if (!isOpen) return null;
 
@@ -31,14 +33,17 @@ const ModalChildren = () => {
   </>
 }
 
-const FloatingActionButton = ({ show = false }: { show: boolean}) => {
-  
-  if(!show) return null;
+const FloatingActionButton = () => {
+
+  const dispatch = useDispatch<AppDispatch>();
+  const { isVisible, type } = useSelector((state: RootState) => state.modal);
+
+  if(!isVisible) return null;
 
   return (
     <>
-      <Modal isOpen={show} onClose={() => {}} children={<ModalChildren />}/>
-      <button className="flex items-center block fixed bottom-10 left-1/2 ransform -translate-x-1/2 bg-black text-white p-4 rounded-full shadow-lg hover:bg-black transition min-w-[40rem]" onClick={() => {}}>
+      <Modal isOpen={isVisible} onClose={() => dispatch(hideModal())} children={<ModalChildren />}/>
+      <button className="flex items-center block fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-black text-white p-4 rounded-full shadow-lg hover:bg-black transition min-w-[40rem]" onClick={() => {}}>
         <span className="mr-1 flex items-center text-md"><AiOutlinePlus /></span>
         Create new task
         <div className="absolute right-2 flex space-x-1 p-1">

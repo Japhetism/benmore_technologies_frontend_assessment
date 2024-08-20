@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
+import { fetchLists } from "../../redux/list";
+import { hideModal, showModal } from "../../redux/modal";
 import Button from "../button";
 import Error from "../error";
-import { fetchLists } from "../../redux/list";
 import { IList } from "../../interfaces/IList"
 import { listIconsFixtures } from "../../fixtures/icons";
 
@@ -12,6 +13,7 @@ const ListList = () => {
 
     const dispatch = useDispatch<AppDispatch>();
     const { lists, status, error } = useSelector((state: RootState) => state.lists);
+    const { isVisible, type } = useSelector((state: RootState) => state.modal);
 
     useEffect(() => {
         if (status === 'idle') {
@@ -23,6 +25,18 @@ const ListList = () => {
         const Icon = listIconsFixtures()[index];
         const DefaultIcon = listIconsFixtures()[listIconsFixtures().length - 1];
         return Icon ? <Icon /> : <DefaultIcon />;
+    }
+
+    const handleModal = () => {
+        if (isVisible) dispatch(hideModal());
+
+        if (!isVisible) dispatch(showModal({ type: "lists" }));
+    }
+
+    const getButtonTitle = () => {
+        if (isVisible && type === "lists") return "Close new list"
+
+        return "Create new list";
     }
 
     return <>
@@ -53,7 +67,7 @@ const ListList = () => {
             )}
         </ul>
         <div className="mt-6">
-            <Button name="Create new list" signText="L" isLoading={status === "loading"} showCommandIcon showPlusIcon onClick={() => console.log("create new list")}/>
+            <Button name={getButtonTitle()} signText="L" isLoading={status === "loading"} showCommandIcon showPlusIcon onClick={() => handleModal()}/>
         </div>
     </>
 }

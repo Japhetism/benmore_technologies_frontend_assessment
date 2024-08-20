@@ -3,20 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineFileAdd, AiOutlineFieldTime, AiOutlineMore, AiOutlineClose, AiOutlineAlignCenter } from "react-icons/ai";
 import { AppDispatch, RootState } from "../../redux/store";
 import { fetchTasks } from "../../redux/task";
-import SelectDropdown from "../../components/dropdown";
+import { hideModal, showModal } from "../../redux/modal";
+import { ITask } from "../../interfaces/ITask";
 import FloatingActionButton from "../../components/modal";
+import SelectDropdown from "../../components/dropdown";
 import Error from "../../components/error";
 import { getFormattedTodayDate } from "../../utils/formatter";
 import { getGreetingBasedOnTime } from "../../utils/helper";
-import { ITask } from "../../interfaces/ITask";
+
 
 const Tasks = () => {
 
     const dispatch = useDispatch<AppDispatch>();
     const { tasks, status, error } = useSelector((state: RootState) => state.tasks);
+    const { isVisible } = useSelector((state: RootState) => state.modal);
 
-    const [showModal, setShowModal] = useState<boolean>(false);
-    
     useEffect(() => {
         if (status === 'idle') {
             dispatch(fetchTasks());
@@ -27,7 +28,13 @@ const Tasks = () => {
         { value: '1', label: 'Option 1' },
         { value: '2', label: 'Option 2' },
         { value: '3', label: 'Option 3' },
-      ];
+    ];
+
+    const handleModal = () => {
+        if (isVisible) dispatch(hideModal());
+
+        if (!isVisible) dispatch(showModal({ type: "tasks" }));
+    }
 
     return <>
         <div className="bg-gray-100 h-screen w-auto p-20">
@@ -77,9 +84,9 @@ const Tasks = () => {
                     ))
                 )}           
             </div>
-            <FloatingActionButton show={showModal} />
-            <button className="fixed bottom-6 right-6 bg-white text-gray-500 rounded-full p-4 shadow-lg hover:bg-gray-700" aria-label="Add Task" onClick={() => setShowModal(!showModal)}>
-                {showModal ? <AiOutlineClose /> : <AiOutlineFileAdd />}
+            <FloatingActionButton />
+            <button className="fixed bottom-6 right-6 bg-white text-gray-500 rounded-full p-4 shadow-lg hover:bg-gray-700" aria-label="Add Task" onClick={() => handleModal()}>
+                {isVisible ? <AiOutlineClose /> : <AiOutlineFileAdd />}
             </button>
         </div>
     </>

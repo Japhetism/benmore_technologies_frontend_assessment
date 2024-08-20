@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/store";
 import { fetchGroups } from "../../redux/group";
+import { hideModal, showModal } from "../../redux/modal";
 import Button from "../button";
 import Error from "../error";
 import { IGroup } from "../../interfaces/IGroup";
@@ -11,12 +12,25 @@ const GroupList = () => {
 
     const dispatch = useDispatch<AppDispatch>();
     const { groups, status, error } = useSelector((state: RootState) => state.groups);
+    const { isVisible, type } = useSelector((state: RootState) => state.modal);
 
     useEffect(() => {
         if (status === 'idle') {
             dispatch(fetchGroups());
         }
     }, [status, dispatch]);
+
+    const handleModal = () => {
+        if (isVisible) dispatch(hideModal());
+
+        if (!isVisible) dispatch(showModal({ type: "groups" }));
+    }
+
+    const getButtonTitle = () => {
+        if (isVisible && type === "groups") return "Close new group"
+
+        return "Create new group";
+    }
     
     return <>
         <Error show={status === "error"} message={error} />
@@ -38,7 +52,7 @@ const GroupList = () => {
                 ))
             )}
         </div>
-        <Button name="Create new group" signText="G" isLoading={status === "loading"} showCommandIcon showPlusIcon onClick={() => console.log("create new group")}/>
+        <Button name={getButtonTitle()} signText="G" isLoading={status === "loading"} showCommandIcon showPlusIcon onClick={() => handleModal()}/>
     </>
 }
 

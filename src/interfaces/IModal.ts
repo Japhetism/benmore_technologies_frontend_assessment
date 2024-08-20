@@ -1,5 +1,9 @@
+export type IModalType =
+    | "tasks"
+    | "lists"
+    | "groups"
+
 export interface IModal {
-    isOpen: boolean;
-    children: any;
-    onClose: () => void;
+    isVisible: boolean
+    type: IModalType
 }
