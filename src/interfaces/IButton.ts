@@ -3,5 +3,6 @@ export interface IButton {
     signText?: string
     showPlusIcon?: boolean
     showCommandIcon?: boolean
+    isLoading?: boolean
     onClick: () => void
 }

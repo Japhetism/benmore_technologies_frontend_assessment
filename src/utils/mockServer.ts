@@ -11,7 +11,11 @@ export const mockServer = (endpoint: string): any =>  {
         "tasks": taskFixtures,
     }
 
-    return {
-        data: obj[endpoint as keyof typeof obj]
-    }
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({
+                data: obj[endpoint as keyof typeof obj]
+            });
+        }, 5000);
+    });
 }

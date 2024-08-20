@@ -42,6 +42,20 @@ const Tasks = () => {
                         </div>
                     </div>
                 ))}
+                {(status === "loading") && (
+                    Array.from({ length: 5 }).map((_, index) => (
+                        <div className="relative flex items-center justify-between w-full bg-white p-4 rounded-xl mb-2 animate-pulse" key={index}>
+                            <div className="flex items-center space-x-2">
+                                <div className="w-4 h-4 bg-gray-300 rounded-full mr-2"></div>
+                                <div className="w-32 h-4 bg-gray-300 rounded"></div>
+                            </div>
+                            <div className="flex items-center space-x-4">
+                                <div className="flex items-center bg-gray-300 p-1 rounded text-sm w-24 h-4"></div>
+                                <div className="bg-gray-300 p-1 py-1 rounded text-lg w-8 h-8"></div>
+                            </div>
+                        </div>
+                    ))
+                )}           
             </div>
             <button className="fixed bottom-6 right-6 bg-white text-gray-500 rounded-full p-4 shadow-lg hover:bg-gray-700" aria-label="Add Task">
                 <AiOutlineFileAdd />
