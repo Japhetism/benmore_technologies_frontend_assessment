@@ -4,10 +4,11 @@ import { AiOutlineFileAdd, AiOutlineFieldTime, AiOutlineMore, AiOutlineClose, Ai
 import { AppDispatch, RootState } from "../../redux/store";
 import { fetchTasks } from "../../redux/task";
 import SelectDropdown from "../../components/dropdown";
+import FloatingActionButton from "../../components/modal";
+import Error from "../../components/error";
 import { getFormattedTodayDate } from "../../utils/formatter";
 import { getGreetingBasedOnTime } from "../../utils/helper";
 import { ITask } from "../../interfaces/ITask";
-import FloatingActionButton from "../../components/modal";
 
 const Tasks = () => {
 
