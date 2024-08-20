@@ -18,10 +18,10 @@ const GroupList = () => {
     }, [status, dispatch]);
     
     return <>
-        <div className="flex flex-row space-x-2 overflow-x-auto scrollbar-hidden">
+        <div className="flex flex-row space-x-3 mb-4 overflow-x-auto scrollbar-hidden">
             {groups.map((group: IGroup, index: number) => (
                 <div>
-                    <div className="bg-gray-300 w-36 h-36 rounded" />
+                    <div className="bg-gray-300 w-40 h-40 rounded" />
                     <p className="text-black text-lg font-bold">{group.name}</p>
                     <p className="text-gray-500">{formatGroupUserLabel(group)}</p>
                 </div>
