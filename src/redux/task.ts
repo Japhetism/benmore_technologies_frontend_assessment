@@ -11,27 +11,27 @@ const initialState: ITaskState = {
     error: null,
 }
 
-export const fetchTasks = createAsyncThunk('/', async () => {
+export const fetchTasks = createAsyncThunk('/tasks', async () => {
     const response = await api<ITask[]>(endpoint_path, "GET");
     return response.data;
 });
 
-export const fetchTaskById = createAsyncThunk('/:id', async (id: string) => {
+export const fetchTaskById = createAsyncThunk('/tasks/:id', async (id: string) => {
     const response = await api<ITask>(`${endpoint_path}/${id}`, "GET");
     return response.data;
 });
 
-export const addTask = createAsyncThunk('/add', async (list: ITaskMutate) => {
+export const addTask = createAsyncThunk('/tasks/add', async (list: ITaskMutate) => {
     const response = await api<ITask>(endpoint_path, "POST", list);
     return response.data;
 });
 
-export const updateTask = createAsyncThunk('/update/:id', async (task: ITask) => {
+export const updateTask = createAsyncThunk('/tasks/update/:id', async (task: ITask) => {
     const response = await api<ITask>(`${endpoint_path}/${task.id}`, "PUT", task);
     return response.data;
 });
 
-export const deleteTask = createAsyncThunk('/delete/:id', async (id: string) => {
+export const deleteTask = createAsyncThunk('/tasks/delete/:id', async (id: string) => {
     await api<void>(`${endpoint_path}/${id}`, "DELETE");
     return id;
 });

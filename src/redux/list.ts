@@ -11,27 +11,27 @@ const initialState: IListState = {
     error: null,
 }
 
-export const fetchLists = createAsyncThunk('/', async () => {
+export const fetchLists = createAsyncThunk('/lists', async () => {
     const response = await api<IList[]>(endpoint_path, "GET");
     return response.data;
 });
 
-export const fetchListById = createAsyncThunk('/:id', async (id: string) => {
+export const fetchListById = createAsyncThunk('/lists/:id', async (id: string) => {
     const response = await api<IList>(`${endpoint_path}/${id}`, "GET");
     return response.data;
 });
 
-export const addList = createAsyncThunk('/add', async (list: IListMutate) => {
+export const addList = createAsyncThunk('/lists/add', async (list: IListMutate) => {
     const response = await api<IList>(endpoint_path, "POST", list);
     return response.data;
 });
 
-export const updateList = createAsyncThunk('/update/:id', async (list: IList) => {
+export const updateList = createAsyncThunk('/lists/update/:id', async (list: IList) => {
     const response = await api<IList>(`${endpoint_path}/${list.id}`, "PUT", list);
     return response.data;
 });
 
-export const deleteList = createAsyncThunk('/delete/:id', async (id: string) => {
+export const deleteList = createAsyncThunk('/list/delete/:id', async (id: string) => {
     await api<void>(`${endpoint_path}/${id}`, "DELETE");
     return id;
 });

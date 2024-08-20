@@ -11,27 +11,27 @@ const initialState: IGroupState = {
     error: null,
 }
 
-export const fetchGroups = createAsyncThunk('/', async () => {
+export const fetchGroups = createAsyncThunk('/groups', async () => {
     const response = await api<IGroup[]>(endpoint_path, "GET");
     return response.data;
 });
 
-export const fetchGroupById = createAsyncThunk('/:id', async (id: string) => {
+export const fetchGroupById = createAsyncThunk('/groups/:id', async (id: string) => {
     const response = await api<IGroup>(`${endpoint_path}/${id}`, "GET");
     return response.data;
 });
 
-export const addGroup = createAsyncThunk('/add', async (group: IGroupMutate) => {
+export const addGroup = createAsyncThunk('/groups/add', async (group: IGroupMutate) => {
     const response = await api<IGroup>(endpoint_path, "POST", group);
     return response.data;
 });
 
-export const updateGroup = createAsyncThunk('/update/:id', async (group: IGroup) => {
+export const updateGroup = createAsyncThunk('/groups/update/:id', async (group: IGroup) => {
     const response = await api<IGroup>(`${endpoint_path}/${group.id}`, "PUT", group);
     return response.data;
 });
 
-export const deleteGroup = createAsyncThunk('/delete/:id', async (id: string) => {
+export const deleteGroup = createAsyncThunk('/groups/delete/:id', async (id: string) => {
     await api<void>(`${endpoint_path}/${id}`, "DELETE");
     return id;
 });

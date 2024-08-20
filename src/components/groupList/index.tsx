@@ -20,7 +20,7 @@ const GroupList = () => {
     return <>
         <div className="flex flex-row mt-4 mb-3 space-x-2 overflow-x-auto scrollbar-hidden">
             {groups.map((group: IGroup, index: number) => (
-                <div>
+                <div key={`${index}-${group.id}`}>
                     <div className="bg-gray-300 w-32 h-32 rounded" />
                     <p className="text-black text-md font-bold">{group.name}</p>
                     <p className="text-gray-500 text-sm">{formatGroupUserLabel(group)}</p>
