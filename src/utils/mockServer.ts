@@ -1,9 +1,12 @@
+import { groupFixtures } from "../fixtures/group";
 import { listFixtures } from "../fixtures/list";
-import { IList } from "../interfaces/IList";
+import { userFixtures } from "../fixtures/user";
 
 export const mockServer = (endpoint: string): any =>  {
     const obj = {
-        "lists": listFixtures
+        "lists": listFixtures,
+        "groups": groupFixtures,
+        "users": userFixtures
     }
 
     return {
