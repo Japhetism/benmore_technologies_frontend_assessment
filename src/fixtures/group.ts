@@ -90,7 +90,7 @@ export const groupFixtures: IGroup[] = [
     },
     {
         id: "10393-dddk-jcjfjk",
-        name: "Road Trip Project",
+        name: "Road Project",
         description: "",
         maxMember:10,
         status: "active",
